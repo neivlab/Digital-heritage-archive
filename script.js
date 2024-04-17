@@ -1,8 +1,7 @@
-// Function to initialize the map
 function initMap() {
   // Create a new Google Map instance
   var map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 8, // Initial zoom level
+    zoom: 14, // Initial zoom level
     center: { lat: 51.38307277544511, lng: -2.369336518262417 }, // Initial center coordinates
   });
 
@@ -13,53 +12,82 @@ function initMap() {
     // Loop through each address
     addresses.forEach(function (address) {
       // Geocode the address
-      geocoder.geocode({ address: address }, function (results, status) {
-        // If geocoding is successful
-        if (status === "OK") {
-          // Center the map on the first result
-          map.setCenter(results[0].geometry.location);
-          // Create a marker for the address
-          var marker = new google.maps.Marker({
-            map: map, // Set marker on the map
-            position: results[0].geometry.location, // Set marker position
-          });
-        } else {
-          // If geocoding fails, log an error
-          console.error(
-            "Geocode was not successful for the following reason: " + status
-          );
+      geocoder.geocode(
+        { address: address.address },
+        function (results, status) {
+          // If geocoding is successful
+          if (status === "OK") {
+            // Create a marker for the address
+            var marker = new google.maps.Marker({
+              map: map, // Set marker on the map
+              position: results[0].geometry.location, // Set marker position
+            });
+
+            // Create InfoWindow content from CSV data
+            var content =
+              "<div><strong>" +
+              address.address +
+              "</strong><br>" +
+              address.row10 +
+              "</div>";
+
+            var infoWindow = new google.maps.InfoWindow({
+              content: content, // Content for InfoWindow
+            });
+
+            // Add click event listener to marker
+            marker.addListener("click", function () {
+              infoWindow.open(map, marker);
+            });
+          } else {
+            // If geocoding fails, log an error
+            console.error(
+              "Geocode was not successful for the following reason: " + status
+            );
+          }
         }
-      });
+      );
     });
   }
 
-  // Function to load addresses from CSV
   function loadAddressesFromCSV() {
-    // Path to the CSV file
-    var csvFilePath = "your_csv_file.csv"; // Replace with the path to the CSV file
-    // Create a new XMLHttpRequest object
-    var xhr = new XMLHttpRequest();
-    // Open the file
-    xhr.open("GET", csvFilePath);
-    // Set response type
-    xhr.responseType = "text";
-    // When the file is loaded
-    xhr.onload = function () {
-      // If the request was successful
-      if (xhr.status === 200) {
-        // Split the CSV data into an array of addresses
-        var addresses = xhr.responseText.split("\n");
+    // URL of CSV file hosted on S3
+    var csvFileUrl =
+      "https://dhscsvdata.s3.eu-west-2.amazonaws.com/addresses.csv";
+    // Fetch the CSV file
+    fetch(csvFileUrl)
+      .then((response) => response.text())
+      .then((data) => {
+        // Split the CSV data into an array of lines
+        var lines = data.split("\n");
+        // Get headers (first line)
+        var headers = lines[0].split(",");
+        // Find index of 'Address' and 'Row10' columns
+        var addressIndex = headers.indexOf("Address");
+        var row10Index = headers.indexOf("Row10");
+        // Initialize array to store addresses and corresponding data
+        var addresses = [];
+        // Loop through each line (starting from second line)
+        for (var i = 1; i < lines.length; i++) {
+          var line = lines[i].split(",");
+          // Check if the line is not empty
+          if (line.length > 1) {
+            // Extract address and row10 data
+            var address = line[addressIndex];
+            var row10 = line[row10Index];
+            // Push address and row10 data to array
+            addresses.push({ address: address, row10: row10 });
+          }
+        }
         // Call the geocodeAddresses function with the addresses array
         geocodeAddresses(addresses);
-      } else {
-        // If the request failed, log an error
-        console.error("Failed to load CSV file. Status: " + xhr.status);
-      }
-    };
-    // Send the request
-    xhr.send();
+      })
+      .catch((error) => {
+        // If an error occurs during fetching or processing
+        console.error("Failed to load CSV file:", error);
+      });
   }
 
-  // Automatically load addresses from CSV when the page loads
+  // Call the loadAddressesFromCSV function when the page loads
   loadAddressesFromCSV();
 }

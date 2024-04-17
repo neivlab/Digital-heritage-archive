@@ -1,59 +1,89 @@
-* {
+body {
+    font-family: 'Open Sans', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
-/* Body styles */
-body {
-    font-family: Arial, sans-serif;
+.content {
+    padding: 2rem;
+}
+.content:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
-/* Header styles */
-header {
-    background-color: #fff; /* White background */
-    color: #000; /* Black text */
-    padding: 20px;
+.header-title-container {
     text-align: center;
+    margin-bottom: 1rem;
 }
 
-/* Navigation styles */
-nav {
-    background-color: #fff; /* White background */
-    color: #000; /* Black text */
-    padding: 10px 0;
-    margin-left: 20px; /* Add margin to the left */
-}
-
-nav ul {
-    list-style-type: none;
-    text-align: left;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
-nav ul li a {
-    color: #000; /* Black text */
-    text-decoration: none;
+.header-title {
+    color: #1f2937; /* Adjust the color to match the design */
+    font-size: 24px; /* Adjust the size to match the design */
     font-weight: bold;
+    margin: 0;
+    padding: 0.5rem 0; /* Adjust the padding to match the design */
 }
 
-nav ul li a:hover {
-    text-decoration: underline;
+.navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1rem;
 }
 
-/* Map container styles */
+.navbar a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.text-block {
+    color: #6b7280;
+    margin-bottom: 1rem;
+}
+.heritage-image {
+    float: left; /* This makes the text wrap around the image on the right */
+    margin-right: 2rem; /* Adds space between the image and the text */
+    margin-bottom: 1rem; /* Adds space below the image */
+    width: 40%; /* Adjust width as necessary */
+    height: auto; /* Maintain aspect ratio */
+}
+
 #map-container {
-  margin: 20px auto;
-  width: 80%;
-  max-width: 800px;
+    float: right;
+    width: 55%;
+    height: 600px;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
 }
 
-/* Map styles */
 #map {
-  height: 400px;
-  width: 100%;
+    height: 100%;
+    width: 100%;
+}
+
+.explore-button {
+    display: inline-block; /* Makes it a block-level element but allows width and height */
+    background-color: #1f2937; /* Button background color */
+    color: white; /* Text color */
+    text-align: center; /* Centers text within the button */
+    padding: 1rem 2rem; /* Button padding */
+    margin-top: 2rem; /* Space above the button */
+    text-decoration: none; /* Removes underline from link */
+    font-weight: bold; /* Makes the text bold */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    clear: both; /* This will make sure the button is below floated elements */
+}
+.button-container {
+    display: flex; /* Use flexbox to center the button */
+    justify-content: center; /* Center the button horizontally */
+    margin-top: 2rem; /* Add some space above the button */
+    margin-bottom: 2rem; /* Add some space below the button */
+}
+.explore-button:hover {
+    background-color: #374151; /* Slightly darker on hover */
 }
