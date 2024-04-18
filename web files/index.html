@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Heritage Archive</title>
+    <link rel="stylesheet" type="text/css" href="/web files/styles.css" />
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+
+        <div class="header-title-container">
+        <h1 class="header-title">DIGITAL HERITAGE ARCHIVE</h1>
+        </div>
+        <nav class="navigation">
+            <a href="#">HOME</a>
+            <a href="#">LOCATIONS</a>
+            <a href="#">ABOUT US</a>
+        </nav>
+    </header>
+
+<!-- BODY -->
+
+    <div class="content">
+        <h1 class="header">Explore Bath's Heritage</h1>
+
+        <img src="/bath.jpg" alt="Historic buildings in Bath, England, with a prominent cathedral and spire, over a backdrop of hazy hills." class="heritage-image">
+
+     <div class="text-block">
+
+        <p>Welcome to the Digital Heritage Archive – a portal dedicated to preserving the stories of Bath's heritage, 
+        particularly the Bath Blitz of April 1942. Here, we map out a tragic chapter of history, pinpointing locations 
+        across the city with interactive map pins that reveal the narratives of those affected.</p>
+
+        <p>Each pin unfolds a tale of the past, bringing to light the experiences of individuals and sites 
+        during the bombings. This archive serves as a tool for education and remembrance, making the lessons 
+        of yesteryear accessible to all. Dive into our digital repository to explore photographs, personal accounts, 
+        and historical insights, connecting with Bath's enduring spirit in the face of adversity.</p>
+
+     <div id="map-container">
+            <div id="map"></div>
+        </div>
+    </div>
+</div>
+
+<div class="button-container">
+    <a href="#" class="explore-button">Explore Heritage by Location</a>
+</div>
+
+
+<!-- FOOTER -->
+    <footer class="footer">
+
+    </footer>
+
+        
+    <!-- JavaScript code -->
+    <script src="script.js"></script>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFCvLmccuaHNwHL6HX3ARUSRXrq1PVl3M&callback=initMap" async defer></script>
+
+</html>
+</body>
