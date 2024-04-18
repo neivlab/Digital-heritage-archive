@@ -1,39 +1,45 @@
 // Define geocodeAddresses as a standalone function that accepts the map object
 function geocodeAddresses(map, addresses) {
   var geocoder = new google.maps.Geocoder();
+  var currentInfoWindow = null; // Reference to the currently open InfoWindow
 
   addresses.forEach(function (addressData) {
-    // Assemble the full address from the parts
-    var fullAddress = `${addressData.Address}, ${addressData.City}, ${addressData.Country}`;
+      // Assemble the full address from the parts
+      var fullAddress = `${addressData.Address}, ${addressData.City}, ${addressData.Country}`;
+      
+      geocoder.geocode({ 'address': fullAddress }, function (results, status) {
+          if (status === 'OK') {
+              var marker = new google.maps.Marker({
+                  map: map,
+                  position: results[0].geometry.location,
+              });
 
-    geocoder.geocode({ address: fullAddress }, function (results, status) {
-      if (status === "OK") {
-        var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location,
-        });
+              // Create the content string for the InfoWindow using the data from the CSV
+              var content = `<div><strong>Address:</strong> ${addressData.Address}<br>
+                            <strong>City:</strong> ${addressData.City}<br>
+                            <strong>Country:</strong> ${addressData.Country}<br>
+                            <strong>Description:</strong> ${addressData.Info_Description}<br>
+                            <strong>Name:</strong> ${addressData.Person_Name}</div>`;
 
-        // Create the content string for the InfoWindow using the data from the CSV
-        var content = `<div><strong>Address:</strong> ${addressData.Address}<br>
-                       <strong>City:</strong> ${addressData.City}<br>
-                       <strong>Country:</strong> ${addressData.Country}<br>
-                       <strong>Description:</strong> ${addressData.Info_Description}<br>
-                       <strong>Name:</strong> ${addressData.Person_Name}</div>`;
+              var infoWindow = new google.maps.InfoWindow({
+                  content: content
+              });
 
-        var infoWindow = new google.maps.InfoWindow({
-          content: content,
-        });
-
-        // Add a click listener to the marker to open the InfoWindow
-        marker.addListener("click", function () {
-          infoWindow.open(map, marker);
-        });
-      } else {
-        console.error(
-          "Geocode was not successful for the following reason: " + status
-        );
-      }
-    });
+              // Add a click listener to the marker to open the InfoWindow
+              marker.addListener('click', function () {
+                  // Close the currently open InfoWindow if it exists
+                  if (currentInfoWindow) {
+                      currentInfoWindow.close();
+                  }
+                  // Open the new InfoWindow
+                  infoWindow.open(map, marker);
+                  // Update the reference to the currently open InfoWindow
+                  currentInfoWindow = infoWindow;
+              });
+          } else {
+              console.error('Geocode was not successful for the following reason: ' + status);
+          }
+      });
   });
 }
 
