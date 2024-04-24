@@ -75,21 +75,58 @@ function initMap() {
 
 // Function to load addresses from a CSV file hosted on a server
 function loadAddressesFromCSV(map) {
-  var csvFileUrl =
-    "https://dhscsvdata.s3.eu-west-2.amazonaws.com/addresses.csv";
-
+  var csvFileUrl = "https://dhscsvdata.s3.eu-west-2.amazonaws.com/addresses.csv";
+  
   fetch(csvFileUrl)
-    .then((response) => response.text())
-    .then((data) => {
-      // Use parseCSV function to convert CSV text to objects
+    .then(response => response.text())
+    .then(data => {
       var addresses = parseCSV(data);
+      // Save the addresses globally
+      globalAddresses = addresses;
       // Geocode addresses and add markers to the map
       geocodeAddresses(map, addresses);
     })
-    .catch((error) => {
+    .catch(error => {
       console.error("Failed to load CSV file:", error);
     });
 }
 
 // Assign the initMap function to the window object to make it globally accessible
 window.initMap = initMap;
+// Function to show the map and hide the list
+function showMapView() {
+  document.getElementById("map-container").style.display = "block";
+  document.getElementById("list-container").style.display = "none";
+  
+  // Optional: Toggle active class for tabs
+  document.getElementById("mapViewTab").classList.add("active");
+  document.getElementById("listViewTab").classList.remove("active");
+}
+
+// Function to show the list and hide the map
+function showListView() {
+  document.getElementById("map-container").style.display = "none";
+  document.getElementById("list-container").style.display = "block";
+
+  // Generate the list view using the addresses
+  generateListView();
+
+  // Optional: Toggle active class for tabs
+  document.getElementById("mapViewTab").classList.remove("active");
+  document.getElementById("listViewTab").classList.add("active");
+}
+
+// Global variable to store the addresses data
+var globalAddresses = [];
+
+// Function to generate the list view
+function generateListView() {
+  var listContainer = document.getElementById("list-container");
+  listContainer.innerHTML = ''; // Clear previous content
+  globalAddresses.forEach(function(address) {
+    // Create list item for each address
+    var listItem = document.createElement("div");
+    listItem.innerHTML = `<strong>${address.Address}</strong><br>${address.City}, ${address.Country}<br>${address.Info_Description}<br>${address.Person_Name}<br><hr>`;
+    listContainer.appendChild(listItem);
+  });
+}

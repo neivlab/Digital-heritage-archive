@@ -87,3 +87,32 @@ body {
 .explore-button:hover {
     background-color: #374151; /* Slightly darker on hover */
 }
+.tabs {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.tab {
+    background-color: #f1f1f1;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+}
+
+.tab:hover {
+    background-color: #ddd;
+}
+
+.tab.active {
+    background-color: #ccc;
+}
+
+#list-container {
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    height: 600px; /* same as map container height for consistency */
+    overflow: auto; /* in case the list is long */
+}
