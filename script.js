@@ -1,5 +1,5 @@
 // Define geocodeAddresses as a standalone function that accepts the map object
-function geocodeAddresses(map, addresses) {
+function geocodeAddresses(map, addresses, bath) {
   var geocoder = new google.maps.Geocoder();
   var currentInfoWindow = null; // Reference to the currently open InfoWindow
 
@@ -71,6 +71,18 @@ function initMap() {
 
   // Load CSV data and then geocode addresses
   loadAddressesFromCSV(map);
+
+  // creates a highlighted polygon around bath city 
+  const bath_highlight = new google.maps.Polygon({
+    paths: bath,
+    strokeColor: "#FF0000",
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: "#FF0000",
+    fillOpacity: 0.5,
+  });
+
+  bath_highlight.setMap(map);
 }
 
 // Function to load addresses from a CSV file hosted on a server
@@ -130,3 +142,9 @@ function generateListView() {
     listContainer.appendChild(listItem);
   });
 }
+
+// module.exports = {
+  
+//   showMapView
+
+// }

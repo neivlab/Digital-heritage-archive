@@ -16,8 +16,8 @@
         </div>
         <nav class="navigation">
             <a href="#">HOME</a>
-            <a href="#">LOCATIONS</a>
-            <a href="#">ABOUT US</a>
+            <a href="locations.html">LOCATIONS</a>
+            <a href="aboutUs.html">ABOUT US</a>
         </nav>
     </header>
 
@@ -28,7 +28,7 @@
 
         <img src="bath.jpg" alt="Historic buildings in Bath, England, with a prominent cathedral and spire, over a backdrop of hazy hills." class="heritage-image">
 
-     <div class="text-block">
+    <div class="text-block">
 
         <p>Welcome to the Digital Heritage Archive – a portal dedicated to preserving the stories of Bath's heritage, 
         particularly the Bath Blitz of April 1942. Here, we map out a tragic chapter of history, pinpointing locations 
@@ -42,15 +42,15 @@
         <div class="tabs">
             <button id="mapViewTab" class="tab" onclick="showMapView()">Map View</button>
             <button id="listViewTab" class="tab" onclick="showListView()">List View</button>
-          </div>
-          
-          <!-- Map container (remains the same) -->
-          <div id="map-container">
+        </div>
+        
+        <!-- Map container (remains the same) -->
+        <div id="map-container">
             <div id="map"></div>
-          </div>
-          
-          <!-- List container (initially hidden) -->
-          <div id="list-container" style="display:none;"></div>
+        </div>
+        
+        <!-- List container (initially hidden) -->
+        <div id="list-container" style="display:none;"></div>
     </div>
 </div>
 
@@ -66,9 +66,9 @@
 
         
     <!-- JavaScript code -->
-    <script src="script.js"></script>
-    <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFCvLmccuaHNwHL6HX3ARUSRXrq1PVl3M&callback=initMap" async defer></script>
+    <script src="Locations.js"  ></script>
+    <script src="script.js" ></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFCvLmccuaHNwHL6HX3ARUSRXrq1PVl3M&callback=initMap&loading=async" async defer></script>
 
 </html>
 </body>
