@@ -1,0 +1,515 @@
+body {
+    font-family: 'Helvetica', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing:
+    border-box;
+}
+
+/* TYPOGRAPHY */
+
+h1 {
+
+    font-family: 'Helvetica', sans-serif;
+    font-style: bold;
+    font-size: 32px;
+    color: rgba(0, 0, 0, 1);
+
+}
+
+h2 {
+
+    font-family: 'Helvetica', sans-serif;
+    font-style: bold;
+    font-size: 26px;
+    color: rgba(0, 0, 0, 1);
+
+}
+
+p {
+
+    font-family: 'Helvetica', sans-serif;
+    font-style: bold;
+    font-size: 16px;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.9);
+
+}
+
+.content {
+    padding: 2rem;
+}
+.content:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.text-block {
+    color: #6b7280;
+    margin-bottom: 1rem;
+}
+.heritage-image {
+    float: left; /* This makes the text wrap around the image on the right */
+    margin-right: 2rem; /* Adds space between the image and the text */
+    margin-bottom: 1rem; /* Adds space below the image */
+    width: 40%; /* Adjust width as necessary */
+    height: auto; /* Maintain aspect ratio */
+}
+
+#map-container {
+    float: right;
+    width: 55%;
+    height: 600px;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.explore-button {
+    display: inline-block; /* Makes it a block-level element but allows width and height */
+    background-color: #1f2937; /* Button background color */
+    color: white; /* Text color */
+    text-align: center; /* Centers text within the button */
+    padding: 1rem 2rem; /* Button padding */
+    margin-top: 2rem; /* Space above the button */
+    text-decoration: none; /* Removes underline from link */
+    font-weight: bold; /* Makes the text bold */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    clear: both; /* This will make sure the button is below floated elements */
+}
+.button-container {
+    display: flex; /* Use flexbox to center the button */
+    justify-content: center; /* Center the button horizontally */
+    margin-top: 2rem; /* Add some space above the button */
+    margin-bottom: 2rem; /* Add some space below the button */
+}
+.explore-button:hover {
+    background-color: #374151; /* Slightly darker on hover */
+}
+.tabs {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.tab {
+    background-color: #f1f1f1;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+}
+
+.tab:hover {
+    background-color: #ddd;
+}
+
+.tab.active {
+    background-color: #ccc;
+}
+
+#list-container {
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    height: 600px; /* same as map container height for consistency */
+    overflow: auto; /* in case the list is long */
+}
+
+
+/* Images */
+
+img {
+
+
+    width: 30%;
+
+}
+
+/* END */
+/* //////////// */
+
+/* External code (will reference) */
+
+/* Tiles */
+
+.tiles {
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    -moz-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    position: relative;
+    margin: -2.5em 0 0 -2.5em;
+}
+
+    .tiles article {
+        -moz-transition: -moz-transform 0.5s ease, opacity 0.5s ease;
+        -webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+        -ms-transition: -ms-transform 0.5s ease, opacity 0.5s ease;
+        transition: transform 0.5s ease, opacity 0.5s ease;
+        position: relative;
+        width: calc(33.33333% - 2.5em);
+        margin: 2.5em 0 0 2.5em;
+    }
+
+        .tiles article > .image {
+            -moz-transition: -moz-transform 0.5s ease;
+            -webkit-transition: -webkit-transform 0.5s ease;
+            -ms-transition: -ms-transform 0.5s ease;
+            transition: transform 0.5s ease;
+            position: relative;
+            display: block;
+            width: 100%;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+            .tiles article > .image img {
+                display: block;
+                width: 100%;
+            }
+
+            .tiles article > .image:before {
+                pointer-events: none;
+                -moz-transition: background-color 0.5s ease, opacity 0.5s ease;
+                -webkit-transition: background-color 0.5s ease, opacity 0.5s ease;
+                -ms-transition: background-color 0.5s ease, opacity 0.5s ease;
+                transition: background-color 0.5s ease, opacity 0.5s ease;
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 1.0;
+                z-index: 1;
+                opacity: 0.8;
+            }
+
+            .tiles article > .image:after {
+                pointer-events: none;
+                -moz-transition: opacity 0.5s ease;
+                -webkit-transition: opacity 0.5s ease;
+                -ms-transition: opacity 0.5s ease;
+                transition: opacity 0.5s ease;
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cstyle%3Eline %7B stroke-width: 0.25px%3B stroke: %23ffffff%3B %7D%3C/style%3E%3Cline x1='0' y1='0' x2='100' y2='100' /%3E%3Cline x1='100' y1='0' x2='0' y2='100' /%3E%3C/svg%3E");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                opacity: 0.25;
+                z-index: 2;
+            }
+
+        .tiles article > a {
+            display: -moz-flex;
+            display: -webkit-flex;
+            display: -ms-flex;
+            display: flex;
+            -moz-flex-direction: column;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -moz-align-items: center;
+            -webkit-align-items: center;
+            -ms-align-items: center;
+            align-items: center;
+            -moz-justify-content: center;
+            -webkit-justify-content: center;
+            -ms-justify-content: center;
+            justify-content: center;
+            -moz-transition: background-color 0.5s ease, -moz-transform 0.5s ease;
+            -webkit-transition: background-color 0.5s ease, -webkit-transform 0.5s ease;
+            -ms-transition: background-color 0.5s ease, -ms-transform 0.5s ease;
+            transition: background-color 0.5s ease, transform 0.5s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 1em;
+            border-radius: 4px;
+            border-bottom: 0;
+            color: #ffffff;
+            text-align: center;
+            text-decoration: none;
+            z-index: 3;
+        }
+
+            .tiles article > a > :last-child {
+                margin: 0;
+            }
+
+            .tiles article > a:hover {
+                color: #ffffff !important;
+            }
+
+            .tiles article > a h2 {
+                margin: 0;
+            }
+
+            .tiles article > a .content {
+                -moz-transition: max-height 0.5s ease, opacity 0.5s ease;
+                -webkit-transition: max-height 0.5s ease, opacity 0.5s ease;
+                -ms-transition: max-height 0.5s ease, opacity 0.5s ease;
+                transition: max-height 0.5s ease, opacity 0.5s ease;
+                width: 100%;
+                max-height: 0;
+                line-height: 1.5;
+                margin-top: 0.35em;
+                opacity: 0;
+            }
+
+                .tiles article > a .content > :last-child {
+                    margin-bottom: 0;
+                }
+
+        .tiles article.style1 > .image:before {
+            background-color: #ffffff;
+        }
+
+        .tiles article.style2 > .image:before {
+            background-color: #ffffff;
+        }
+
+        .tiles article.style3 > .image:before {
+            background-color: #ffffff;
+        }
+
+        .tiles article.style4 > .image:before {
+            background-color: #ffffff;
+        }
+
+        .tiles article.style5 > .image:before {
+            background-color: #ffffff;
+        }
+
+        .tiles article.style6 > .image:before {
+            background-color: #ffffff;
+        }
+
+        body:not(.is-touch) .tiles article:hover > .image {
+            -moz-transform: scale(1.1);
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+
+            body:not(.is-touch) .tiles article:hover > .image:before {
+                background-color: #ffffff;
+                opacity: 0.35;
+            }
+
+            body:not(.is-touch) .tiles article:hover > .image:after {
+                opacity: 0;
+            }
+
+        body:not(.is-touch) .tiles article:hover .content {
+            max-height: 15em;
+            opacity: 1;
+        }
+
+    * + .tiles {
+        margin-top: 2em;
+    }
+
+    body.is-preload .tiles article {
+        -moz-transform: scale(0.9);
+        -webkit-transform: scale(0.9);
+        -ms-transform: scale(0.9);
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    body.is-touch .tiles article .content {
+        max-height: 15em;
+        opacity: 1;
+    }
+
+    @media screen and (max-width: 1280px) {
+
+        .tiles {
+            margin: -1.25em 0 0 -1.25em;
+        }
+
+            .tiles article {
+                width: calc(33.33333% - 1.25em);
+                margin: 1.25em 0 0 1.25em;
+            }
+
+    }
+
+    @media screen and (max-width: 980px) {
+
+        .tiles {
+            margin: -2.5em 0 0 -2.5em;
+        }
+
+            .tiles article {
+                width: calc(50% - 2.5em);
+                margin: 2.5em 0 0 2.5em;
+            }
+
+    }
+
+    @media screen and (max-width: 736px) {
+
+        .tiles {
+            margin: -1.25em 0 0 -1.25em;
+        }
+
+            .tiles article {
+                width: calc(50% - 1.25em);
+                margin: 1.25em 0 0 1.25em;
+            }
+
+                .tiles article:hover > .image {
+                    -moz-transform: scale(1.0);
+                    -webkit-transform: scale(1.0);
+                    -ms-transform: scale(1.0);
+                    transform: scale(1.0);
+                }
+
+    }
+
+    @media screen and (max-width: 480px) {
+
+        .tiles {
+            margin: 0;
+        }
+
+            .tiles article {
+                width: 100%;
+                margin: 1.25em 0 0 0;
+            }
+
+    }
+
+    /* Main */
+
+	#main {
+		padding: 0em 0 6em 0 ;
+	}
+
+		@media screen and (max-width: 736px) {
+
+			#main {
+				padding: 0em 0 4em 0 ;
+			}
+
+		}
+
+    /* Section/Article */
+
+	section.special, article.special {
+		text-align: center;
+	}
+
+	header p {
+		margin-top: -1em;
+	}
+
+	@media screen and (max-width: 736px) {
+
+		header p {
+			margin-top: 0;
+		}
+
+	}
+
+    /* Wrapper */
+
+	#wrapper > * > .inner {
+		width: 100%;
+		max-width: 68em;
+		margin: 0 auto;
+		padding: 0 2.5em;
+	}
+
+		@media screen and (max-width: 736px) {
+
+			#wrapper > * > .inner {
+				padding: 0 1.25em;
+			}
+
+		}
+
+    /* Image */
+
+	.image {
+		border-radius: 4px;
+		border: 0;
+		display: inline-block;
+		position: relative;
+	}
+
+		.image img {
+			border-radius: 4px;
+			display: block;
+		}
+
+		.image.left, .image.right {
+			max-width: 40%;
+		}
+
+			.image.left img, .image.right img {
+				width: 100%;
+			}
+
+		.image.left {
+			float: left;
+			padding: 0 1.5em 1em 0;
+			top: 0.25em;
+		}
+
+		.image.right {
+			float: right;
+			padding: 0 0 1em 1.5em;
+			top: 0.25em;
+		}
+
+		.image.fit {
+			display: block;
+			margin: 0 0 2em 0;
+			width: 100%;
+		}
+
+			.image.fit img {
+				width: 100%;
+			}
+
+		.image.main {
+			display: block;
+			margin: 0 0 3em 0;
+			width: 100%;
+		}
+
+			.image.main img {
+				width: 100%;
+			}
+
+			@media screen and (max-width: 736px) {
+
+				.image.main {
+					margin: 0 0 2em 0;
+				}
+
+			}
+
